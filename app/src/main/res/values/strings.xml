@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">rlsy</string>
+    <string name="title_activity_splash">splash</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="please_wait" />
+    <string name="no_internet" />
+    <string name="settings" />
+    <string name="notice">NOTICE</string>
+    <string name="result">Result</string>
+
+    <string name="todo">TODO</string>
+    <string name="loading">loading</string>
+    <string name="upload_paused">pus</string>
+</resources>
