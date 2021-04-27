@@ -51,7 +51,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         holder.dateTextView.setText(getDateToday());
         Glide.with(mContext)
                 .load(currentTeacher.getURL())
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.loading)
                 .fitCenter()
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade())

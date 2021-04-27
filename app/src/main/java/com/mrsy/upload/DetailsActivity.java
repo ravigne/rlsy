@@ -51,7 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
 //                .into(teacherDetailImageView);
 
         Glide.with(this).load(imageURL)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.loading)
                 .into(teacherDetailImageView);
 
 

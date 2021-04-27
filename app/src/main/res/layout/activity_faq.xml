@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Faq">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/faq"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+
+        android:background="#27732A"/>
 
     <WebView
-        android:id="@+id/webhelp"
+        android:id="@+id/webfaq"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <ProgressBar
         android:padding="150dp"
-        android:id="@+id/proghelp"
+        android:id="@+id/progfaq"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/oading"

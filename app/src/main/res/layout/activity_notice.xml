@@ -27,17 +27,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <ProgressBar
-        android:paddingTop="560dp"
-        android:paddingRight="40dp"
-        android:paddingBottom="170dp"
+        android:padding="150dp"
         android:id="@+id/prognotice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/oading"
+        android:elevation="10dp"
         android:clickable="true"
         android:focusable="true"
+        style="?android:attr/progressBarStyleLarge"
+        android:indeterminateDrawable="@drawable/custom_progressbar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         />
+
 
 
 </RelativeLayout>

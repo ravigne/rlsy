@@ -2,14 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mrsy.rlsy">
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:largeHeap="true"
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@drawable/activity"
         android:label="@string/app_name"
@@ -18,8 +17,10 @@
         android:theme="@style/Theme.Rlsy"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name="com.mrsy.help.help"></activity>
+        <activity android:name="com.mrsy.help.help" />
         <activity android:name=".Login" />
+        <activity android:name=".Faq" />
+
         <activity android:name="com.mrsy.upload.updateprofile" />
         <activity android:name="com.mrsy.upload.DetailsActivity" />
         <activity android:name="com.mrsy.upload.ItemsActivity" />
@@ -35,6 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
     </application>
 
 </manifest>

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,21 +25,35 @@
     <WebView
         android:id="@+id/webview1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <ProgressBar
-        android:paddingTop="560dp"
-        android:paddingRight="40dp"
-        android:paddingBottom="170dp"
-        android:id="@+id/progresult"
+        android:layout_height="wrap_content"/>
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:layout_below="@+id/webview1"
+
+        android:id="@+id/my_template"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/oading"
-        android:elevation="10dp"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_height="wrap_content"
+        app:gnt_template_type="@layout/gnt_medium_template_view"
         />
 
 
-</RelativeLayout>
+        <ProgressBar
+            android:padding="150dp"
+            android:id="@+id/progresult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/oading"
+            android:elevation="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            style="?android:attr/progressBarStyleLarge"
+            android:indeterminateDrawable="@drawable/custom_progressbar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

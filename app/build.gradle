@@ -71,6 +71,7 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
-
+    implementation 'com.google.android.gms:play-services-ads-lite:19.8.0'
+    implementation project(':NativeTemplatesAndroid-1.0.0')
 
 }

@@ -1,8 +1,6 @@
 package com.mrsy.rlsy
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -10,6 +8,15 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.ads.nativetemplates.NativeTemplateStyle
+import com.google.android.ads.nativetemplates.TemplateView
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.initialization.InitializationStatus
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
+import com.google.android.gms.ads.nativead.NativeAd
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 
@@ -19,6 +26,19 @@ class Result : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
+        MobileAds.initialize(this, object: OnInitializationCompleteListener {
+            override fun onInitializationComplete(initializationStatus: InitializationStatus) {}
+        })
+        val builder = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        builder.forUnifiedNativeAd(object: UnifiedNativeAd.OnUnifiedNativeAdLoadedListener {
+            override fun onUnifiedNativeAdLoaded(unifiedNativeAd:UnifiedNativeAd) {
+                val templateView = findViewById<TemplateView>(R.id.my_template)
+                templateView.setNativeAd(unifiedNativeAd)
+            }
+        })
+        val adLoader = builder.build()
+        adLoader.loadAd(AdRequest.Builder().build())
+
         // TODO: 19/4/21 network
         NoInternetDialogSignal.Builder(
             this,
@@ -47,8 +67,8 @@ class Result : AppCompatActivity() {
                 super.onPageFinished(view, url)
                 webview.loadUrl(
                     "javascript:(function() { " +
-                            "document.getElementById('footer').style.display='none'; "+
-                            "document.getElementById('header').style.display='none'; "+
+                            "document.getElementById('footer').style.display='none'; " +
+                            "document.getElementById('header').style.display='none'; " +
                             " document.getElementsByClassName('wrapper row2')[0].style.display='none'; " +
                             "})()"
                 )
@@ -74,5 +94,9 @@ class Result : AppCompatActivity() {
         }
         return super.onKeyDown(keyCode, event)
     }
+
+}
+
+private fun AdLoader.loadAd(build: NativeTemplateStyle?) {
 
 }

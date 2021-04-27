@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(){
         val info = findViewById<Button>(R.id.inf)
         
         info.setOnClickListener{
-            val intent = Intent(this, help::class.java)
+            val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
         val button = findViewById<Button>(R.id.noticc)
