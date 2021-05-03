@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/pic"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/background"
+        android:src="@drawable/itsme"
         app:civ_border_color="#3f51b5"
         app:civ_border_width="4dp"
         app:civ_shadow="true"
@@ -21,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Ravi Shankar"
+        android:text="@string/ravi_shankar"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="24sp"
@@ -31,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:text="Developer"
+        android:text="@string/developer"
         android:textSize="16sp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/pic"
@@ -40,8 +43,10 @@
         android:id="@+id/picture"
         android:layout_below="@+id/pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/profile"/>
+        android:scaleType="centerCrop"
+        android:layout_height="150dp"
+        android:src="@drawable/bbbbb"
+        android:contentDescription="@string/todo" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="100dp"
@@ -61,26 +66,36 @@
         android:layout_marginStart="151dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/faq"
-        android:text="FAQ"
+        android:text="@string/faq"
         android:id="@+id/faq"/>
     <TextView
+        android:layout_below="@+id/my_template1"
+        android:id="@+id/txt"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="30dp"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="All the content here is taken from web.This is not official App , If you have any problem or query Visit: https://www.brabu.net or"/>
+        android:text="@string/all_the_content_here_is_taken_from_web_this_is_not_official_app_if_you_have_any_problem_or_query_visit_https_www_brabu_net_or"/>
 
     <TextView
-        android:gravity="center"
-        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/txt"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contact:Ravignelyf@gmail.com"/>
-
+        android:text="@string/contact_ravignelyf_gmail_com"/>
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/help"
+        android:id="@+id/my_template1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:gnt_template_type="@layout/gnt_medium_template_view"
+        />
 
 
 </RelativeLayout>
+
+</ScrollView>

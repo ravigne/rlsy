@@ -10,9 +10,9 @@
         android:largeHeap="true"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
-        android:icon="@drawable/activity"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/activity"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rlsy"
         android:usesCleartextTraffic="true"
@@ -38,7 +38,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-5066360578662876~7805872989"/>
     </application>
 
 </manifest>

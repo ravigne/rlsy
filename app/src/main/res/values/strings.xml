@@ -8,9 +8,15 @@
     <string name="settings" />
     <string name="notice">NOTICE</string>
     <string name="result">Result</string>
-
-    <string name="todo">TODO</string>
     <string name="loading">loading</string>
     <string name="upload_paused">pus</string>
     <string name="faq">FAQ</string>
+    <string name="all_the_content_here_is_taken_from_web_this_is_not_official_app_if_you_have_any_problem_or_query_visit_https_www_brabu_net_or">All the content here is taken from web.This is not official App , If you have any problem or query Visit: https://www.brabu.net or</string>
+    <string name="contact_ravignelyf_gmail_com">Contact:Ravignelyf@gmail.com</string>
+    <string name="ravi_shankar">Ravi Shankar</string>
+    <string name="developer">Developer</string>
+
+    <string name="todo">TODO</string>
+    <string name="teacher_name">Teacher Name</string>
+    <string name="date">Date</string>
 </resources>

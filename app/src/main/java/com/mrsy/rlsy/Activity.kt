@@ -1,30 +1,28 @@
 package com.mrsy.rlsy
 
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 class Activity : AppCompatActivity() {
     lateinit var mWebview : WebView
     val ref = FirebaseDatabase.getInstance().getReference("URL")
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_activity)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
         NoInternetDialogSignal.Builder(
             this,
             lifecycle
@@ -35,7 +33,7 @@ class Activity : AppCompatActivity() {
         }.build()
         mWebview = findViewById(R.id.webhelp)
         mWebview.settings.javaScriptEnabled = true
-        var progress = findViewById<ProgressBar>(R.id.proghelp)
+        val progress = findViewById<ProgressBar>(R.id.proghelp)
 
         mWebview.webViewClient=object : WebViewClient(){
             override fun shouldOverrideUrlLoading(view:WebView, url:String):Boolean {

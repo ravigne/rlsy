@@ -1,8 +1,10 @@
 package com.mrsy.rlsy
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
@@ -13,6 +15,11 @@ import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,9 +29,32 @@ import com.mrsy.upload.ItemsActivity
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 class MainActivity : AppCompatActivity(){
+    private var mInterstitialAd: InterstitialAd? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //ADS
+
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(this,"ca-app-pub-5066360578662876/2705798972", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
+
+        Handler().postDelayed({
+            showad()
+        },60000)
+
+
+
 // TODO: 19/4/21 network
 
         NoInternetDialogSignal.Builder(
@@ -116,6 +146,13 @@ class MainActivity : AppCompatActivity(){
                 })
     }
 
+    private fun showad() {
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
+        }
+
+    }
+
     private fun openImagesActivity() {
         val intent = Intent(this, ItemsActivity::class.java)
         startActivity(intent)    }
@@ -132,7 +169,7 @@ class MainActivity : AppCompatActivity(){
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 1000)
+        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 1000)
 
     }
 

@@ -9,6 +9,9 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 class Form : AppCompatActivity() {
@@ -17,6 +20,10 @@ class Form : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
+        MobileAds.initialize(this) {}
+        val mAdView  = findViewById<AdView>(R.id.adView1)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         // TODO: 19/4/21 network 
         NoInternetDialogSignal.Builder(
             this,
@@ -26,8 +33,8 @@ class Form : AppCompatActivity() {
 
             }
         }.build()
-        var webView = findViewById<WebView>(R.id.idform)
-        var progress = findViewById<ProgressBar>(R.id.progform)
+        val webView = findViewById<WebView>(R.id.idform)
+        val progress = findViewById<ProgressBar>(R.id.progform)
         webView.settings.javaScriptEnabled=true
         webView.webViewClient = object : WebViewClient() {
 

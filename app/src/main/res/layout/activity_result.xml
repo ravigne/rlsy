@@ -18,7 +18,7 @@
         android:elevation="10dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="32dp"
+        android:textSize="32sp"
 
         android:background="#27732A"/>
 
@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"/>
     <com.google.android.ads.nativetemplates.TemplateView
         android:layout_below="@+id/webview1"
-
         android:id="@+id/my_template"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

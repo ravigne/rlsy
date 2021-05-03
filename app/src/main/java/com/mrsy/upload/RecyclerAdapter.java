@@ -3,9 +3,6 @@ package com.mrsy.upload;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.ExifInterface;
-import android.net.Uri;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,10 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.mrsy.rlsy.R;
-import com.squareup.picasso.Picasso;
-
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +44,22 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+        if (position%2 == 0 ) {
+            holder.templete.setVisibility(View.VISIBLE);
+            AdLoader.Builder builder = new AdLoader.Builder(
+                    mContext, "ca-app-pub-5066360578662876/4868093735");
+
+
+            builder.forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                @Override
+                public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                    holder.templete.setNativeAd(unifiedNativeAd);
+                }
+            });
+
+            final AdLoader adLoader = builder.build();
+            adLoader.loadAd(new AdRequest.Builder().build());
+        }
         Teacher currentTeacher = teachers.get(position);
         holder.nameTextView.setText(currentTeacher.getTitle());
         holder.dateTextView.setText(getDateToday());
@@ -69,9 +83,11 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         public TextView nameTextView;
         public TextView dateTextView;
         public ImageView teacherImageView;
+        public TemplateView templete;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
+            templete = itemView.findViewById(R.id.my_templaterecy);
             nameTextView =itemView.findViewById ( R.id.nameTextView );
             dateTextView = itemView.findViewById(R.id.dateTextView);
             teacherImageView = itemView.findViewById(R.id.teacherImageView);
@@ -130,42 +146,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     private String getDateToday(){
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd");
         Date date=new Date();
-        String today= dateFormat.format(date);
-        return today;
+        return dateFormat.format(date);
     }
 
-//    public static class ImageRotationDetectionHelper {
-//
-//        public static int getCameraPhotoOrientation(String imageFilePath) {
-//            int rotate = 0;
-//            try {
-//
-//                ExifInterface exif;
-//
-//                exif = new ExifInterface(imageFilePath);
-//                String exifOrientation = exif
-//                        .getAttribute(ExifInterface.TAG_ORIENTATION);
-//                Log.d("exifOrientation", exifOrientation);
-//                int orientation = exif.getAttributeInt(
-//                        ExifInterface.TAG_ORIENTATION,
-//                        ExifInterface.ORIENTATION_NORMAL);
-//                Log.d(ImageRotationDetectionHelper.class.getSimpleName(), "orientation :" + orientation);
-//                switch (orientation) {
-//                    case ExifInterface.ORIENTATION_ROTATE_270:
-//                        rotate = 270;
-//                        break;
-//                    case ExifInterface.ORIENTATION_ROTATE_180:
-//                        rotate = 180;
-//                        break;
-//                    case ExifInterface.ORIENTATION_ROTATE_90:
-//                        rotate = 90;
-//                        break;
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return rotate;
-//        }
-//    }
 }

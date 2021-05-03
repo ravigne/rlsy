@@ -11,12 +11,12 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.ads.nativetemplates.NativeTemplateStyle
 import com.google.android.ads.nativetemplates.TemplateView
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.initialization.InitializationStatus
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
-import com.google.android.gms.ads.nativead.NativeAd
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 
@@ -29,7 +29,7 @@ class Result : AppCompatActivity() {
         MobileAds.initialize(this, object: OnInitializationCompleteListener {
             override fun onInitializationComplete(initializationStatus: InitializationStatus) {}
         })
-        val builder = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
+        val builder = AdLoader.Builder(this, "ca-app-pub-5066360578662876/6828651474")
         builder.forUnifiedNativeAd(object: UnifiedNativeAd.OnUnifiedNativeAdLoadedListener {
             override fun onUnifiedNativeAdLoaded(unifiedNativeAd:UnifiedNativeAd) {
                 val templateView = findViewById<TemplateView>(R.id.my_template)
@@ -52,7 +52,7 @@ class Result : AppCompatActivity() {
         webview.settings.javaScriptEnabled = true
         webview.webViewClient = WebViewClient()
         webview.webChromeClient = WebChromeClient()
-        var progress = findViewById<ProgressBar>(R.id.progresult)
+        val progress = findViewById<ProgressBar>(R.id.progresult)
 
 
         webview.webViewClient = object : WebViewClient() {
@@ -97,6 +97,3 @@ class Result : AppCompatActivity() {
 
 }
 
-private fun AdLoader.loadAd(build: NativeTemplateStyle?) {
-
-}

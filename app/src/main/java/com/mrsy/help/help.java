@@ -32,29 +32,22 @@ public class help extends AppCompatActivity {
             Button fab = findViewById(R.id.fab);
 
 
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(mMessage.getText().toString().isEmpty()) {
-                        mMessage.setBackgroundColor(Color.CYAN);
-                        Toast.makeText(help.this, "cheacked", Toast.LENGTH_SHORT).show();
-                    } else {
-                        sendMail();
-                        // edit
-                        // Text is not empty
-                    }
-
-
-
-                }
-            });
+            fab.setOnClickListener(view -> sendMail());
         }
 
         private void sendMail() {
             String mail = mEmail.getText().toString().trim();
             String message = mMessage.getText().toString();
             String subject = mSubject.getText().toString().trim();
+            if (TextUtils.isEmpty(message)) {
+                mMessage.setError("Message is Required.");
+                return;
+            }
 
+            if (TextUtils.isEmpty(subject)) {
+                mSubject.setError("info  is Required.");
+                return;
+            }
             //Send Mail
             JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,message);
 
