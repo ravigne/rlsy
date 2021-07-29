@@ -21,14 +21,17 @@ import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.mrsy.rlsy.R;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
-    private Context mContext;
-    private List<Teacher> teachers;
+    private final Context mContext;
+    private final List<Teacher> teachers;
     private OnItemClickListener mListener;
 
     public RecyclerAdapter(Context context, List<Teacher> uploads) {
@@ -36,6 +39,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
         teachers = uploads;
     }
 
+    @NotNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.row_model, parent, false);
@@ -43,7 +47,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recyc
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull RecyclerViewHolder holder, int position) {
         if (position%2 == 0 ) {
             holder.templete.setVisibility(View.VISIBLE);
             AdLoader.Builder builder = new AdLoader.Builder(

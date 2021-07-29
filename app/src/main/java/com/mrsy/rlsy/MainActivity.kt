@@ -1,6 +1,5 @@
 package com.mrsy.rlsy
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -20,20 +19,25 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.mrsy.help.help
-import com.mrsy.upload.ItemsActivity
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 class MainActivity : AppCompatActivity(){
     private var mInterstitialAd: InterstitialAd? = null
-
+    private var MY_REQUEST_CODE = 101
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        FirebaseMessaging.getInstance().subscribeToTopic("hello");
+//        update
+        callinupdate()
+
         //ADS
 
         MobileAds.initialize(this) {}
@@ -101,7 +105,7 @@ class MainActivity : AppCompatActivity(){
 
         val bthelp = findViewById<Button>(R.id.btnhelp)
         bthelp.setOnClickListener{
-            val intent = Intent(this, Activity::class.java)
+            val intent = Intent(this, Studentcorner::class.java)
             startActivity(intent)
         }
 
@@ -146,6 +150,37 @@ class MainActivity : AppCompatActivity(){
                 })
     }
 
+    private fun callinupdate() {
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.IMMEDIATE,
+                    this,
+                    MY_REQUEST_CODE)
+
+            }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data== null) return
+        if (requestCode == MY_REQUEST_CODE) {
+            Toast.makeText(this,"Updating...",Toast.LENGTH_LONG).show()
+            if (resultCode != RESULT_OK) {
+                Log.e("MY_APP", "Update flow failed! Result code: $resultCode")
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
+
     private fun showad() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(this)
@@ -154,7 +189,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun openImagesActivity() {
-        val intent = Intent(this, ItemsActivity::class.java)
+        val intent = Intent(this, Activity::class.java)
         startActivity(intent)    }
 
 

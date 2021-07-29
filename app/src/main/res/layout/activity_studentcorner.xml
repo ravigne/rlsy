@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Studentcorner">
+    <TextView
+        android:background="@color/browser_actions_bg_grey"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:text="Student Corner"
+        android:gravity="center"
+        android:elevation="10dp"/>
+    <WebView
+        android:id="@+id/studentweb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:layout_below="@+id/studentweb"
+        android:id="@+id/my_template1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:gnt_template_type="@layout/gnt_medium_template_view"
+        />
+
+</RelativeLayout>

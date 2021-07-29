@@ -42,8 +42,6 @@ public class Login extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
         } else {
-            // User is signed out
-
 
             mLoginBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,8 +61,6 @@ public class Login extends AppCompatActivity {
                     }
 
                     progressBar.setVisibility(View.VISIBLE);
-
-                    // authenticate the user
 
                     fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

@@ -50,11 +50,10 @@ class Faq : AppCompatActivity() {
                         "javascript:(function() { " +
                                 "document.getElementById('footer').style.display='none'; " +
                                 "document.getElementById('header').style.display='none'; " +
-                                        " document.getElementsByClassName('widget PopularPosts')[0].style.display='none'; " +
-                        " document.getElementsByClassName('post-title-container')[0].style.display='none'; " +
+                                " document.getElementsByClassName('widget PopularPosts')[0].style.display='none'; " +
+                                " document.getElementsByClassName('post-title-container')[0].style.display='none'; " +
                                 " document.getElementsByClassName('post-bottom')[0].style.display='none'; " +
-                                        " document.getElementsByClassName('post-header-container container')[0].style.display='none'; " +
-
+                                " document.getElementsByClassName('post-header-container container')[0].style.display='none'; " +
                                         "})()")
             }
 

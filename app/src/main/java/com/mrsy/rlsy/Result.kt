@@ -1,22 +1,19 @@
 package com.mrsy.rlsy
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.ads.nativetemplates.NativeTemplateStyle
 import com.google.android.ads.nativetemplates.TemplateView
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.google.android.gms.ads.initialization.InitializationStatus
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import org.imaginativeworld.oopsnointernet.dialogs.signal.NoInternetDialogSignal
 
 
@@ -26,9 +23,8 @@ class Result : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-        MobileAds.initialize(this, object: OnInitializationCompleteListener {
-            override fun onInitializationComplete(initializationStatus: InitializationStatus) {}
-        })
+        MobileAds.initialize(this
+        ) { }
         val builder = AdLoader.Builder(this, "ca-app-pub-5066360578662876/6828651474")
         builder.forUnifiedNativeAd(object: UnifiedNativeAd.OnUnifiedNativeAdLoadedListener {
             override fun onUnifiedNativeAdLoaded(unifiedNativeAd:UnifiedNativeAd) {
@@ -48,19 +44,49 @@ class Result : AppCompatActivity() {
 
             }
         }.build()
+
         val webview =findViewById<WebView>(R.id.webview1)
         webview.settings.javaScriptEnabled = true
-        webview.webViewClient = WebViewClient()
+        webview.settings.domStorageEnabled = true
+
+         webview.webViewClient = WebViewClient()
         webview.webChromeClient = WebChromeClient()
         val progress = findViewById<ProgressBar>(R.id.progresult)
 
-
+        webview.setDownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        }
+        webview.webChromeClient = object : WebChromeClient() {
+        override fun onJsAlert(
+            view: WebView?,
+            url: String?,
+            message: String?,
+            result: JsResult?
+        ): Boolean {
+            return super.onJsAlert(view, url, message, result)
+        }
+    }
+       webview.setDownloadListener(DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(url)
+            startActivity(i)
+        })
         webview.webViewClient = object : WebViewClient() {
+
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 progress.visibility = View.VISIBLE
-
+                webview.loadUrl(
+                    "javascript:(function() { " +
+                            "document.getElementById('footer').style.display='none'; " +
+                            "document.getElementById('header').style.display='none'; " +
+                            " document.getElementsByClassName('wrapper row2')[0].style.display='none'; " +
+                            "})()"
+                )
                 return super.shouldOverrideUrlLoading(view, url)
+
             }
             override fun onPageFinished(view: WebView, url: String) {
                 progress.visibility = View.GONE

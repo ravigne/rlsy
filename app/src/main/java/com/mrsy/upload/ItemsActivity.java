@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +20,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mrsy.rlsy.Login;
 import com.mrsy.rlsy.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +52,7 @@ public class ItemsActivity extends AppCompatActivity implements RecyclerAdapter.
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         Button add = findViewById(R.id.addbtn);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openactivity();
-            }
-
-        });
+        add.setOnClickListener(view -> openactivity());
         mProgressBar = findViewById(R.id.myDataLoaderProgressBar);
         mProgressBar.setVisibility(View.VISIBLE);
 
@@ -72,7 +67,7 @@ public class ItemsActivity extends AppCompatActivity implements RecyclerAdapter.
 
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
 
                 mTeachers.clear();
 
@@ -86,7 +81,7 @@ public class ItemsActivity extends AppCompatActivity implements RecyclerAdapter.
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NotNull DatabaseError databaseError) {
                 Toast.makeText(ItemsActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
@@ -118,12 +113,9 @@ public class ItemsActivity extends AppCompatActivity implements RecyclerAdapter.
         final String selectedKey = selectedItem.getKey();
 
         StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getURL());
-        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(ItemsActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
-            }
+        imageRef.delete().addOnSuccessListener(aVoid -> {
+            mDatabaseRef.child(selectedKey).removeValue();
+            Toast.makeText(ItemsActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
         });
 
     }
